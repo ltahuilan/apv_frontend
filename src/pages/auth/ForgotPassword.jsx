@@ -4,19 +4,36 @@ import AuthHeader from '../../components/authHeader'
 import FormLayout from '../../components/FormLayout'
 import ButtonSubmit from '../../components/ButtonSubmit'
 import Alert from '../../components/Alert'
+import axiosClient from '../../config/axiosClient'
 
 function ForgotPassword() {
+
     const [alert, setAlert] = useState({});
+    const [email, setEmail] = useState('');
+
+    const {message} = alert;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axiosClient.post('/veterinarian/forgot-password', {email});
+            setAlert({message: response.data.message});
+        } catch (error) {
+            setAlert({message: error.response.data.message, error: true})
+        }
+    }
 
     return (
         <>
             <AuthHeader text='Recupera tu cuenta para' />
 
             <FormLayout>
-                {alert && 
+
+                {message && 
                     <Alert alert={alert} />
                 }
-                <form className='space-y-4'>
+
+                <form className='space-y-4' onSubmit={handleSubmit}>
                     <div className="flex flex-col space-y-2">
                         <label htmlFor="email" className="w-full text-slate-600 dark:text-slate-300 font-bold">
                             Email
@@ -27,6 +44,8 @@ function ForgotPassword() {
                             id="email"
                             placeholder="Your email"
                             className="p-2 bg-slate-100 dark:bg-slate-900 dark:text-slate-200 border border-slate-400 rounded-lg"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
                         />
                     </div>
 
