@@ -2,7 +2,6 @@ import { Link} from "react-router-dom";
 import { useState } from "react";
 import axiosClient from "../../config/axiosClient";
 import AuthHeader from "../../components/authHeader";
-import FormLayout from "../../components/FormLayout";
 import Alert from "../../components/Alert";
 import ButtonSubmit from "../../components/ButtonSubmit";
 
@@ -51,60 +50,59 @@ function Register() {
     return(
         <>
             <AuthHeader text='Regístrate para' />
-
-            <FormLayout>
-                
+            
+            <div className="form-layout">
                 {alert.message && <Alert alert={alert} /> }
 
                 <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="flex flex-col space-y-2">
-                        <label htmlFor="name" className="w-full text-slate-600 dark:text-slate-300 font-bold">
+                        <label htmlFor="name" className="w-full text-zinc-600 dark:text-zinc-300 font-bold">
                             Name
                         </label>
                         <input
                             type="text"
                             id="name"
                             placeholder="Your name"
-                            className="p-2 bg-slate-100 dark:bg-slate-900 dark:text-slate-200 border border-slate-400 rounded-lg"
+                            className="p-2 bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-200 border border-zinc-400 rounded-lg"
                             value={name}
                             onChange={e => setName(e.target.value)}
                         />
                     </div>
                     <div className="flex flex-col space-y-2">
-                        <label htmlFor="email" className="w-full text-slate-600 dark:text-slate-300 font-bold">
+                        <label htmlFor="email" className="w-full text-zinc-600 dark:text-zinc-300 font-bold">
                             Email
                         </label>
                         <input
                             type="email"
                             id="email"
                             placeholder="Your email"
-                            className="p-2 bg-slate-100 dark:bg-slate-900 dark:text-slate-200 border border-slate-400 rounded-lg"
+                            className="p-2 bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-200 border border-zinc-400 rounded-lg"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                         />
                     </div>
                     <div className="flex flex-col space-y-2">
-                        <label htmlFor="password" className="w-full text-slate-600 dark:text-slate-300 font-bold">
+                        <label htmlFor="password" className="w-full text-zinc-600 dark:text-zinc-300 font-bold">
                             Password
                         </label>
                         <input
                             type="password"
                             id="password"
                             placeholder="Password"
-                            className="p-2 bg-slate-100 dark:bg-slate-900 dark:text-slate-200 border border-slate-400 rounded-lg"
+                            className="p-2 bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-200 border border-zinc-400 rounded-lg"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                         />
                     </div>
                     <div className="flex flex-col space-y-2">
-                        <label htmlFor="confirm-password" className="w-full text-slate-600 dark:text-slate-300 font-bold">
+                        <label htmlFor="confirm-password" className="w-full text-zinc-600 dark:text-zinc-300 font-bold">
                             Confirm Password
                         </label>
                         <input
                             type="password"
                             id="confirm-password"
                             placeholder="Confirm password"
-                            className="p-2 bg-slate-100 dark:bg-slate-900 dark:text-slate-200 border border-slate-400 rounded-lg"
+                            className="p-2 bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-200 border border-zinc-400 rounded-lg"
                             value={confirmPassword}
                             onChange={e => setConfirmPassword(e.target.value)}
                         />
@@ -116,14 +114,14 @@ function Register() {
                 </form>
 
                 <nav className="flex justify-between  mt-10">
-                    <Link to="/" className="text-slate-600 dark:text-slate-400 hover:dark:text-slate-500 text-sm">
+                    <Link to="/" className="text-zinc-600 dark:text-zinc-400 hover:dark:text-zinc-500 text-sm">
                         ¿Ya tienes cuenta? Inicia sesión
                     </Link>
-                    <Link to="/forgot-password" className="text-slate-600 dark:text-slate-400 hover:dark:text-slate-500 text-sm">
+                    <Link to="/forgot-password" className="text-zinc-600 dark:text-zinc-400 hover:dark:text-zinc-500 text-sm">
                         Olvide mi password
                     </Link>
                 </nav>
-            </FormLayout>
+            </div>
         </>
     )
 }

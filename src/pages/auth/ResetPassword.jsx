@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import AuthHeader from '../../components/authHeader'
-import FormLayout from '../../components/FormLayout'
 import ButtonSubmit from '../../components/ButtonSubmit'
 import Alert from '../../components/Alert'
 import axiosClient from '../../config/axiosClient'
@@ -11,7 +10,7 @@ function ResetPassword() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [alert, setAlert] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [waitingResponse, setWaitingResponse] = useState(true);
     const [passwordUpdated, setPasswordUpdated] = useState(false);
     const [verifiedToken, setVerifiedToken] = useState(false);
     const params = useParams();
@@ -29,7 +28,7 @@ function ResetPassword() {
                 // setAlert({message: error});
                 setAlert({message: error.response.data.message, error: true});
             }
-            setLoading(false);
+            setWaitingResponse(false);
         }
         verifyToken();
     }, [token]);
@@ -63,9 +62,9 @@ function ResetPassword() {
         <>
             <AuthHeader text='Recupera tu password para' />
 
-            <FormLayout>
-                {loading &&
-                    <p className='text-white text-center'>Loading...</p>
+            <class className="form-layout">
+                {waitingResponse &&
+                    <p className="text-center text-gray-500">Cargando...</p>
                 }
 
                 {message && 
@@ -77,27 +76,27 @@ function ResetPassword() {
                         <form className='space-y-4' onSubmit={handleSubmit}>
 
                             <div className="flex flex-col space-y-2">
-                                <label htmlFor="password" className="w-full text-slate-600 dark:text-slate-300 font-bold">
+                                <label htmlFor="password" className="w-full text-zinc-600 dark:text-zinc-300 font-bold">
                                     New Password
                                 </label>
                                 <input
                                     type="password"
                                     id="password"
                                     placeholder="Password"
-                                    className="p-2 bg-slate-100 dark:bg-slate-900 dark:text-slate-200 border border-slate-400 rounded-lg"
+                                    className="p-2 bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-200 border border-zinc-400 rounded-lg"
                                     value={password}
                                     onChange={e => setPassword(e.target.value)}
                                 />
                             </div>
                             <div className="flex flex-col space-y-2">
-                                <label htmlFor="confirm-password" className="w-full text-slate-600 dark:text-slate-300 font-bold">
+                                <label htmlFor="confirm-password" className="w-full text-zinc-600 dark:text-zinc-300 font-bold">
                                     Confirm New Password
                                 </label>
                                 <input
                                     type="password"
                                     id="confirm-password"
                                     placeholder="Confirm password"
-                                    className="p-2 bg-slate-100 dark:bg-slate-900 dark:text-slate-200 border border-slate-400 rounded-lg"
+                                    className="p-2 bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-200 border border-zinc-400 rounded-lg"
                                     value={confirmPassword}
                                     onChange={e => setConfirmPassword(e.target.value)}
                                 />
@@ -110,15 +109,14 @@ function ResetPassword() {
 
                         {passwordUpdated && (
                             <nav className="flex justify-center mt-10">
-                                <Link to="/" className="text-slate-600 dark:text-slate-400 hover:dark:text-slate-500 text-sm">
+                                <Link to="/" className="text-zinc-600 dark:text-zinc-400 hover:dark:text-zinc-500 text-sm">
                                     Iniciar sesión
                                 </Link>
                             </nav>
                         )}
                     </>
                 }
-
-            </FormLayout>
+            </class>
         </>
     )
 }

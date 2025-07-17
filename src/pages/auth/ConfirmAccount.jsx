@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AuthHeader from "../../components/authHeader";
-import FormLayout from "../../components/FormLayout";
 import Alert from "../../components/Alert";
 import axiosClient from "../../config/axiosClient";
 
@@ -9,7 +8,7 @@ import axiosClient from "../../config/axiosClient";
 function ConfirmAccount() {
 
     const [alert, setAlert] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [waitingResponse, setWaitingResponse] = useState(true);
     const [confirmatedAccount, setConfirmatedAccount] = useState(false);
 
     const params = useParams();
@@ -32,7 +31,7 @@ function ConfirmAccount() {
                 });
                 setConfirmatedAccount(false);
             }
-            setLoading(false);
+            setWaitingResponse(false);
         }
         confirmAccount();        
     }, [token]);
@@ -41,19 +40,19 @@ function ConfirmAccount() {
         <>
             <AuthHeader text='Confirma tu cuenta para ' />
 
-            <FormLayout>
-                {loading && <p className="text-white">Loading...</p>}
+            <div className="form-layout">
+                {waitingResponse && <p className="text-center text-gray-500">Loading...</p>}
 
-                {!loading && <Alert alert={alert} /> }
+                {!waitingResponse && <Alert alert={alert} /> }
 
                 {confirmatedAccount && 
                     <nav className="flex justify-center mt-10">
-                        <Link to="/" className="text-slate-600 dark:text-slate-400 hover:dark:text-slate-500 text-sm">
+                        <Link to="/" className="text-zinc-600 dark:text-zinc-400 hover:dark:text-zinc-500 text-sm">
                             Iniciar sesión
                         </Link>
                     </nav>               
                 }
-            </FormLayout>
+            </div>
         </>
     )
 }
