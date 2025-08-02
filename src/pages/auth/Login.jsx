@@ -5,6 +5,7 @@ import AuthHeader from "../../components/authHeader";
 import ButtonSubmit from "../../components/ButtonSubmit";
 import Alert from "../../components/Alert";
 import axiosClient from "../../config/axiosClient";
+import { useEffect } from "react";
 
 
 function Login() {
@@ -14,9 +15,21 @@ function Login() {
     const [alert, setAlert] = useState({});
     const [waitingResponse, setWaitingResponse] = useState(false);
 
-    const {setAuth} = useAuth({});
+    const {setAuth, tokenError} = useAuth({});
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const resetTokenExpired = () => {
+            if(tokenError) {
+                setAlert({message: tokenError, error: true})
+                localStorage.removeItem('apv_token');
+                return;
+            }
+            setAlert({});
+        }
+        resetTokenExpired();
+    }, []);
 
     async function handleSubmit (e) {
         e.preventDefault();
@@ -38,7 +51,7 @@ function Login() {
 
             //almacenar el token en local storage
             localStorage.setItem('apv_token', data.token);
-
+            // console.log(data.token);
             //pasar los datos del usaurio al context 
             setAuth(data);
 
@@ -64,6 +77,7 @@ function Login() {
                 {alert.message && !waitingResponse &&
                     <Alert alert={alert} />
                 }
+
                 <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="flex flex-col space-y-2">
                         <label htmlFor="email" className="w-full text-zinc-600 dark:text-zinc-300 font-bold">

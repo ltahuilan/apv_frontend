@@ -9,6 +9,7 @@ const AuthProvider = ({children}) => {
 
     const [auth, setAuth] = useState({});
     const [loading, setLoading] = useState(true);
+    const [tokenError, setTokenError] = useState('');
 
     useEffect(() => {
         const authUser = async () => {
@@ -19,7 +20,7 @@ const AuthProvider = ({children}) => {
                 setLoading(false);
                 return;
             }
-    
+
             //configuracion para auth JWT
             const config = {
                 headers: {
@@ -27,17 +28,19 @@ const AuthProvider = ({children}) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-    
+        
             try {
                 const url = '/veterinarian/profile'
                 const {data} = await axiosClient(url, config);
                 setAuth(data);                 
 
             } catch (error) {
-                console.log(error.response.data.message);
+                //esta respuesta proviene del middleware isAuthenticated
+                // console.log(error.response.data.message);
+                setTokenError(error.response.data.message);
                 setAuth({});
             } finally {
-                setLoading(false);
+                    setLoading(false);
             }
         };
         authUser();
@@ -58,6 +61,7 @@ const AuthProvider = ({children}) => {
                 auth,
                 setAuth,
                 loading,
+                tokenError,
                 logout
             }
         }>

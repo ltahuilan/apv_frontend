@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Alert({alert}) {
-  const styleError = 'from-red-100 dark:from-red-700 to-red-300 dark:to-red-800 text-red-700 dark:text-white';
+  const styleError = 'from-red-100 to-red-300 text-red-800';
   const styleNoError = 'from-indigo-100 dark:from-indigo-500 to-indigo-400 dark:to-indigo-900 text-indigo-800 dark:text-white';
 
   return (

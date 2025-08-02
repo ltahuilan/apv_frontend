@@ -1,5 +1,5 @@
 @import "tailwindcss";
 
 @utility form-layout {
-    @apply bg-white dark:bg-zinc-800 p-6 rounded-xl mt-10 md:mt-0 shadow-2xl transition-all;
+    @apply bg-white dark:bg-zinc-800 p-6 rounded-xl mt-10 md:mt-0 shadow-2xl dark:shadow-zinc-950 transition-all;
 }
