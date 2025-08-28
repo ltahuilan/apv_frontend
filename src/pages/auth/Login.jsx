@@ -70,7 +70,7 @@ function Login() {
             <AuthHeader text='Inicia sesión para' />
 
             <div className='form-layout'>
-                                {waitingResponse && 
+                {waitingResponse && 
                     <p className="text-white text-center py-3">Loading...</p>
                 }
 

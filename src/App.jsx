@@ -1,23 +1,25 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { AuthProvider} from './context/AuthProvider'
-import { PatientProvider } from './context/PatienteProvider'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider} from './context/AuthProvider';
+import { PatientProvider } from './context/PatienteProvider';
 
 //layouts
-import AuthLayout from './layout/authLayout'
-import PrivateLayout from './layout/PrivateLayout'
+import AuthLayout from './layout/authLayout';
+import PrivateLayout from './layout/PrivateLayout';
 
 //Public pages
-import Login from './pages/auth/Login'
-import Register from './pages/auth/Register'
-import ConfirmAccount from './pages/auth/ConfirmAccount'
-import ForgotPassword from './pages/auth/ForgotPassword'
-import ResetPassword from './pages/auth/ResetPassword'
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import ConfirmAccount from './pages/auth/ConfirmAccount';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
 
 //Protected pages
-import ManagePatients from './pages/admin/ManagePatients'
+import ManagePatients from './pages/admin/ManagePatients';
+import Profile from './pages/admin/Profile';
 
 //css
 import './App.css'
+import UpdatePassword from './pages/admin/UpdatePassword';
 
 
 function App() {
@@ -42,6 +44,8 @@ function App() {
                             </PatientProvider>
                         }>
                         <Route index element={<ManagePatients />} />
+                        <Route path='profile' element={<Profile />} />
+                        <Route path='update-password' element={<UpdatePassword />} />
                     </Route>
                 </Routes>
             </AuthProvider>

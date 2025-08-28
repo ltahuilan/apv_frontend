@@ -164,7 +164,6 @@ function FormPatients({className}) {
                 <ButtonPrimary 
                     type={'submit'}
                     label={_id ? 'Update' : 'Save'}
-                    onSubmit={handleSubmit}
                     className={!alert.message ? 'block' : 'opacity-25'}
                 />
 
@@ -172,8 +171,8 @@ function FormPatients({className}) {
                     <ButtonSecondary
                         type={'button'}
                         label={'Cancel'}
-                        onClick={resetForm}
                         className={'w-full'}
+                        onClick={resetForm}
                     />
                 }
             </form>

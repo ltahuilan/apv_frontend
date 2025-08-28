@@ -13,10 +13,16 @@ function Header() {
                 </h1>
                 <nav className="flex flex-col md:flex-row md:gap-6 md:items-center text-center">
                     <div className="flex flex-col md:flex-row md:gap-3">
-                        <Link className="text-zinc-200 hover:text-white dark:text-zinc-300 text-lg font-bold">
+                        <Link
+                            className="text-zinc-200 hover:text-white dark:text-zinc-300 text-lg font-bold"
+                            to="/admin"
+                        >
                             Pacientes
                         </Link>
-                        <Link className="text-zinc-200 hover:text-white dark:text-zinc-300 text-lg font-bold">
+                        <Link 
+                            to="/admin/profile"
+                            className="text-zinc-200 hover:text-white dark:text-zinc-300 text-lg font-bold"
+                        >
                             Perfil
                         </Link>
                     </div>
