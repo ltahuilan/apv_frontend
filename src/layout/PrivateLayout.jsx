@@ -2,10 +2,13 @@ import { Outlet, Navigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Loading from "../components/Loading";
 
 function PrivateLayout() {
 
-    const {auth} = useAuth();
+    const {auth, loading} = useAuth();
+
+    if(loading) return <Loading />;
 
     return (
         <>

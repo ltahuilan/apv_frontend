@@ -34,7 +34,7 @@ const AuthProvider = ({children}) => {
             try {
                 const url = '/veterinarian/profile'
                 const {data} = await axiosClient(url, config);
-                setAuth(data);                 
+                setAuth(data);              
 
             } catch (error) {
                 //esta respuesta proviene del middleware isAuthenticated
@@ -43,7 +43,7 @@ const AuthProvider = ({children}) => {
                 setAuth({});
                 navigate('/admin');
             } finally {
-                    setLoading(false);
+                setLoading(false);
             }
         };
         authUser();

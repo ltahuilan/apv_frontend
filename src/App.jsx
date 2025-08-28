@@ -3,7 +3,7 @@ import { AuthProvider} from './context/AuthProvider';
 import { PatientProvider } from './context/PatienteProvider';
 
 //layouts
-import AuthLayout from './layout/authLayout';
+import AuthLayout from './layout/AuthLayout';
 import PrivateLayout from './layout/PrivateLayout';
 
 //Public pages
