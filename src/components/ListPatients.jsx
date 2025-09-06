@@ -10,27 +10,27 @@ function ListPatients() {
     return (
         <>
             {patients.length ?
-            (
-                <div className='p-6'>
-                    <h3 className='text-zinc-800 dark:text-zinc-200 text-3xl text-center font-bold'>
-                        Listado de pacientes
-                    </h3>
-                    <p className='text-zinc-800 dark:text-zinc-200 text-xl text-center my-6'>
-                        Administra tus pacientes y citas
-                    </p>
+                (
+                    <div className='p-6'>
+                        <h3 className='text-zinc-800 dark:text-zinc-200 text-3xl text-center font-bold'>
+                            Listado de pacientes
+                        </h3>
+                        <p className='text-zinc-800 dark:text-zinc-200 text-xl text-center my-6'>
+                            Administra tus pacientes y citas
+                        </p>
 
-                    <div className='space-y-6'>
-                        {patients.map(patient => (
-                            <Patient
-                                key={patient._id}
-                                patient={patient}
-                            />
-                        ))}
+                        <div className='space-y-6'>
+                            {patients.map(patient => (
+                                <Patient
+                                    key={patient._id}
+                                    patient={patient}
+                                />
+                            ))}
+                        </div>
                     </div>
-                </div>
-            )
-            :
-            (
+                )
+                :
+                (
                 <>
                     <h3 className='text-zinc-800 dark:text-zinc-200 text-3xl text-center font-bold'>
                         No hay pacientes

@@ -10,7 +10,7 @@ function ResetPassword() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [alert, setAlert] = useState({});
-    const [waitingResponse, setWaitingResponse] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [passwordUpdated, setPasswordUpdated] = useState(false);
     const [verifiedToken, setVerifiedToken] = useState(false);
     const params = useParams();
@@ -28,7 +28,7 @@ function ResetPassword() {
                 // setAlert({message: error});
                 setAlert({message: error.response.data.message, error: true});
             }
-            setWaitingResponse(false);
+            setLoading(false);
         }
         verifyToken();
     }, [token]);
@@ -63,7 +63,7 @@ function ResetPassword() {
             <AuthHeader text='Recupera tu password para' />
 
             <class className="form-layout">
-                {waitingResponse &&
+                {loading &&
                     <p className="text-center text-gray-500">Cargando...</p>
                 }
 

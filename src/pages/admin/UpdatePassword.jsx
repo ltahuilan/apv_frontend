@@ -3,34 +3,42 @@ import useAuth from "../../hooks/useAuth";
 import AdminNav from "../../components/AdminNav";
 import ButtonPrimary from "../../components/ButtonPrimary";
 import Alert from "../../components/Alert";
+import Spinner from "../../components/Spinner";
 
 function UpdatePassword() {
 
     const {passwordChange} = useAuth();
     const [alert, setAlert] = useState({});
+    const [loading, setLoading] = useState(false);
     const [password, setPassword] = useState({
         currentPassword: "",
         newPassword: "",
         confirmPassword: ""
     });
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setAlert({}); //limpiar alertas existentes
+        setLoading(true);
 
         const {newPassword, confirmPassword} = password;
         
         //validar que no haya campos vacíos
         if(!Object.values(password).every(value => value !== '')) {
+            setLoading(false);
             return setAlert({message: 'Todos los campos son requeridos', error: true});            
         }
         
         //validar que el nuevo password contenga al menos 6 caracteres
         if(newPassword.length < 6) {
+            setLoading(false);
             return setAlert({message: 'El nuevo password requiere al menos 6 caracteres', error: true});
         }
 
         //verificar que newPassword y confirmPassword coincidan
         if(newPassword !== confirmPassword) {
+            setLoading(false);
             return setAlert({message: 'Los passwords no coinciden', error: true});
         }
         
@@ -41,10 +49,11 @@ function UpdatePassword() {
         }
 
         if(response.status === 200) {
-            setPassword({currentPassword: "", newPassword: "", confirmPassword: ""});
+            setPassword({...password, currentPassword: '', newPassword: '', confirmPassword: ''});
         }
 
         setAlert(response);
+        setLoading(false);
         
     }
     return (
@@ -115,6 +124,10 @@ function UpdatePassword() {
 
                     {alert.message &&
                         <Alert alert={alert}/>
+                    }
+
+                    {loading &&
+                        <Spinner />
                     }
 
                     <ButtonPrimary

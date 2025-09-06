@@ -101,10 +101,12 @@ const AuthProvider = ({children}) => {
 
         try {
             const url = '/veterinarian/profile/update-password';
-            const response = await axiosClient.put(url, password, config);
-            return {message: response.data.message, error: false}
+            const {data, status} = await axiosClient.put(url, password, config);
+            return {message: data.message, error: false, status: status}
         }catch(error) {
             return {message: error.response.data.message, error: true, status: error.status}
+        }finally {
+            setLoading(false);
         }
 
     }

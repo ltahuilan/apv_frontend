@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import AdminNav from "../../components/AdminNav";
 import ButtonPrimary from "../../components/ButtonPrimary";
 import Alert from "../../components/Alert";
+import Spinner from "../../components/Spinner";
 
 function Profile() {
     const {auth, updateProfile} = useAuth();
@@ -35,10 +36,8 @@ function Profile() {
         setAlert({});
         const response = await updateProfile(profile)
 
-        // console.log(response); 
-        if(response.status === 401) {
-            setProfile({...profile, password: ''});
-        }
+        console.log(response); 
+
         setAlert(response);
         setLoading(false);
     }
@@ -132,7 +131,7 @@ function Profile() {
                             htmlFor="password"
                             className="w-full text-zinc-600 dark:text-zinc-300 font-bold uppercase"
                         >
-                            Your password
+                            Enter your password
                         </label>
                         <input
                             type="password"
@@ -145,18 +144,22 @@ function Profile() {
                         />
                     </div>
 
-                    {loading && 
-                        <p className="text-zinc-800 dark:text-zinc-200 text-center">Loading...</p>
-                    }
                     {alert.message &&
                         <Alert alert={alert}/>
                     }
 
-                    <ButtonPrimary
-                        type={'submit'}
-                        label={'Update'}
-                        className="mt-3"
-                    />
+                    {loading
+                        ?
+                        <Spinner />
+                        :
+                        <ButtonPrimary
+                            type={'submit'}
+                            label={'Update'}
+                            className="mt-3"
+                        />
+                    }
+
+                    
                 </form>
 
             </div>

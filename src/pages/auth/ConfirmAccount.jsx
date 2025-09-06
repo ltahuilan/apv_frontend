@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axiosClient from "../../config/axiosClient";
 import AuthHeader from "../../components/authHeader";
 import Alert from "../../components/Alert";
-import axiosClient from "../../config/axiosClient";
+import Spinner from "../../components/Spinner";
 
 
 function ConfirmAccount() {
@@ -41,7 +42,7 @@ function ConfirmAccount() {
             <AuthHeader text='Confirma tu cuenta para ' />
 
             <div className="form-layout">
-                {waitingResponse && <p className="text-center text-gray-500">Loading...</p>}
+                {waitingResponse && <Spinner />}
 
                 {!waitingResponse && <Alert alert={alert} /> }
 

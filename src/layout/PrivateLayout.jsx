@@ -2,13 +2,15 @@ import { Outlet, Navigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Loading from "../components/Loading";
+import Spinner from "../components/Spinner";
 
 function PrivateLayout() {
 
     const {auth, loading} = useAuth();
 
-    if(loading) return <Loading />;
+    if(loading) {
+        return <Spinner message="Waiting..."/>
+    }
 
     return (
         <>

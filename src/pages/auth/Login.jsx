@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import AuthHeader from "../../components/authHeader";
 import ButtonSubmit from "../../components/ButtonSubmit";
 import Alert from "../../components/Alert";
+import Spinner from "../../components/Spinner";
 import axiosClient from "../../config/axiosClient";
 import { useEffect } from "react";
 
@@ -13,8 +14,7 @@ function Login() {
     let [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [alert, setAlert] = useState({});
-    const [waitingResponse, setWaitingResponse] = useState(false);
-
+    const [loading, setLoading] = useState(false);
     const {setAuth, tokenError} = useAuth({});
 
     const navigate = useNavigate();
@@ -40,7 +40,7 @@ function Login() {
             return;
         }
 
-        setWaitingResponse(true);
+        setLoading(true);
 
         try {
             email = email.toLowerCase();
@@ -62,7 +62,7 @@ function Login() {
             setAlert({message: error.response.data.message, error: true});
         }
 
-        setWaitingResponse(false);
+        setLoading(false);
     }
 
     return(
@@ -70,11 +70,8 @@ function Login() {
             <AuthHeader text='Inicia sesión para' />
 
             <div className='form-layout'>
-                {waitingResponse && 
-                    <p className="text-white text-center py-3">Loading...</p>
-                }
 
-                {alert.message && !waitingResponse &&
+                {alert.message && !loading &&
                     <Alert alert={alert} />
                 }
 
@@ -107,7 +104,7 @@ function Login() {
                     </div>
 
                     <div className="mt-6">
-                        <ButtonSubmit type='submit' value='Login' />
+                        {loading ? <Spinner /> : <ButtonSubmit type='submit' value='Login' />}
                     </div>
                 </form>
 

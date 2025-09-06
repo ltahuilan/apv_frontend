@@ -10,8 +10,6 @@ export const PatientProvider = ({children}) => {
     const [patients, setPatients] = useState([]);
     const [patient, setPatient] = useState({});
     const [success, setSuccess] = useState(false);
-
-    //config
     
     //obtener todos los pacientes al cargar el componente
     useEffect(() => {
@@ -67,12 +65,11 @@ export const PatientProvider = ({children}) => {
                     return currentPatient._id === data._id ? data : currentPatient
                 });
                 setPatients(patientsUpdated);
-                console.log(patientsUpdated);
                 // Opcional: limpiar el paciente de edición después de guardar
                 setPatient({});
                 
             } catch (error) {
-                console.log("Error updating patient:", error.response?.data?.message || error.message);
+                console.error("Error updating patient:", error.response?.data?.message || error.message);
                 setSuccess(false);
             }
 
@@ -82,18 +79,18 @@ export const PatientProvider = ({children}) => {
         //crear nuevo paciente
         try {
             const {data} = await axiosClient.post('/patient/create', patientToSave, config);
-            console.log(data)
+
             //excluir elementos de la respuesta (usar destructuring para mayor claridad)
             // eslint-disable-next-line no-unused-vars
             const {createdAt, updatedAt, __v, ...savedPatient} = data;
-            console.log(savedPatient);
+
             //almacenar el paciente en el state
             setPatients([savedPatient, ...patients]);
 
             setSuccess(true);
 
         } catch (error) {
-            console.log("Error creating patient:", error.response?.data?.message || error.message);
+            console.error("Error creating patient:", error.response?.data?.message || error.message);
             setSuccess(false);
         }
 

@@ -4,6 +4,7 @@ import axiosClient from "../../config/axiosClient";
 import AuthHeader from "../../components/authHeader";
 import Alert from "../../components/Alert";
 import ButtonSubmit from "../../components/ButtonSubmit";
+import Spinner from "../../components/Spinner";
 
 
 function Register() {
@@ -13,6 +14,7 @@ function Register() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [alert, setAlert] = useState({});
+    const [loading, setLoading] = useState(false);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -33,6 +35,7 @@ function Register() {
         }
         
         setAlert({});
+        setLoading(true);
 
         //enviar los datos hacia el backend
         try {
@@ -45,6 +48,7 @@ function Register() {
             console.log(error.response.data.message);
         }
         
+        setLoading(false);
     }
 
     return(
@@ -109,7 +113,7 @@ function Register() {
                     </div>
 
                     <div className="mt-6">
-                        <ButtonSubmit type='submit' value='Register' onSubmit={handleSubmit} />
+                        {loading ? <Spinner /> : <ButtonSubmit type='submit' value='Register' onSubmit={handleSubmit} />}
                     </div>
                 </form>
 
